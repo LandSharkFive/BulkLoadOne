@@ -1,0 +1,19 @@
+# Bulk Loader for Vanilla Plain BTree
+
+This is a .NET 8 Console-mode application which loads vanilla plain BTrees, with separator keys, with various orders (degrees) and fill factors.  A hard disk is simulated, using a mock.  The tree can be printed by physical disk node, or by levels. 
+
+## Install and Build
+
+The is a C# Console-mode Project.  Use Visual Studio 2022 and above to compile.  
+
+## Unit Tests
+
+Several unit tests are enclosed.  Trees of various sizes and orders (degrees) are built and tested.  Invalid Trees are detected using a Node Checker.  The Node Checker checks for Key and ChildIds violations of the basic Order Rules for leaves and internal nodes. There are unit tests check fill factors and verify if the tree is well-formed.
+
+## Default Tree
+
+The default tree is Order 60, with an 80% leaf fill and an 80% internal node fill.  The nodes are deliberately underfilled for safety reasons.
+
+## Purpose
+
+The purpose of the bulk loader is to elminate dead space (free nodes) in the tree.  A balanced tree is produced.  The bulk loader is quick.  Runtime is O(N) and Space is O(Log N), where N is the number of keys.  In practice, space is constant O(1), since the number of levels in the tree is a small number.  Three levels is common.  There are O(Log N) levels, where N is 3 for order > 10 keys per node.
