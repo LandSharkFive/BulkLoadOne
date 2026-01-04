@@ -17,3 +17,15 @@ The default tree is Order 60, with an 80% leaf fill and an 80% internal node fil
 ## Purpose
 
 The purpose of the bulk loader is to elminate dead space (free nodes) in the tree.  A balanced tree is produced.  The bulk loader is quick.  Runtime is O(N) and Space is O(Log N), where N is the number of keys.  In practice, space is constant O(1), since the number of levels in the tree is a small number.  Three levels is common.  There are O(Log N) levels, where N is 3 for order > 10 keys per node.
+
+## Sanity Checks
+
+All nodes in the Tree are checked, including the root node.
+
+* If leaf node, then node.Keys.Count > 0.
+* If leaf mode, then node.Keys.Count < Order.
+* If leaf node, then node.ChildIds.Count == 0.
+* If lndex node, then node.ChildsIds.Count > 0.
+* If lndex node, node.ChildIds.Count <= Order.
+
+
