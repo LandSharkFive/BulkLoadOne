@@ -8,7 +8,7 @@ The is a C# Console-mode Project.  Use Visual Studio 2022 and above to compile.
 
 ## Unit Tests
 
-Several unit tests are enclosed.  Trees of various sizes and orders (degrees) are built and tested.  Invalid Trees are detected using a Node Checker.  The Node Checker checks for Key and ChildIds violations of the basic Order Rules for leaves and internal nodes. There are unit tests which check fill factors.  The unit tests which check if the tree is well-formed.  
+Several unit tests are enclosed.  Trees of various sizes and orders (degrees) are built and tested.  Invalid Trees are detected using a Node Checker.  The Node Checker checks for Key and ChildIds violations of the basic Order Rules for leaves and internal nodes. There are unit tests which check fill factors.  There are unit tests for checking if the tree is well-formed.  
 
 ## Default Tree
 
