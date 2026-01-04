@@ -8,7 +8,7 @@ The is a C# Console-mode Project.  Use Visual Studio 2022 and above to compile.
 
 ## Unit Tests
 
-Several unit tests are enclosed.  Trees of various sizes and orders (degrees) are built and tested.  Invalid Trees are detected using a Node Checker.  The Node Checker checks for Key and ChildIds violations of the basic Order Rules for leaves and internal nodes. There are unit tests check fill factors and verify if the tree is well-formed.
+Several unit tests are enclosed.  Trees of various sizes and orders (degrees) are built and tested.  Invalid Trees are detected using a Node Checker.  The Node Checker checks for Key and ChildIds violations of the basic Order Rules for leaves and internal nodes. There are unit tests which check fill factors.  The unit tests which check if the tree is well-formed.  
 
 ## Default Tree
 
@@ -16,7 +16,7 @@ The default tree is Order 60, with an 80% leaf fill and an 80% internal node fil
 
 ## Purpose
 
-The purpose of the bulk loader is to elminate dead space (free nodes) in the tree.  A balanced tree is produced.  The bulk loader is quick.  Runtime is O(N) and Space is O(Log N), where N is the number of keys.  In practice, space is constant O(1), since the number of levels in the tree is a small number.  Three levels are common.  There are O(Log N) levels, where N is 3 for order > 10 keys per node.
+The purpose of the bulk loader is to remove dead space (unused nodes) in the tree.  A balanced tree is produced.  The bulk loader is quick.  Runtime is O(N) and Space is O(Log N), where N is the number of keys.  In practice, space is a constant O(1), since the number of levels in the tree is a very small number.  Three levels are common.  There are O(Log N) levels, where N is generally 3 for order > 10 keys per node.
 
 ## Sanity Checks
 
