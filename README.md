@@ -1,31 +1,52 @@
-# Bulk Loader for Vanilla Plain BTree
+# Bulk Loader for B-Trees
 
-This is a .NET 8 Console-mode application which loads vanilla plain BTrees, with separator keys, with various orders (degrees) and fill factors.  A hard disk is simulated, using a mock.  The tree can be printed by physical disk node, or by levels. 
+A .NET 8 Console application designed to efficiently bulk-load "plain vanilla" B-Trees. This tool supports configurable orders (degrees), fill factors, and separator keys, using a mocked disk interface to simulate physical storage.
 
-## Install and Build
 
-The is a C# Console-mode Project.  Use Visual Studio 2022 and above to compile.  
 
-## Unit Tests
+---
 
-Several unit tests are enclosed.  Trees of various sizes and orders (degrees) are built and tested.  Invalid Trees are detected using a Node Checker.  The Node Checker checks for Key and ChildIds violations of the basic Order Rules for leaves and internal nodes. There are unit tests which check fill factors.  There are unit tests for checking if the tree is well-formed.  
+## Features
+* **Configurable Parameters:** Supports custom B-Tree orders and specific fill factors for both leaf and internal nodes.
+* **Disk Simulation:** Uses a mock layer to simulate hard disk node storage and I/O.
+* **Visualization:** Options to print the tree structure by physical disk node or by logical levels.
+* **Validation:** Includes a **Node Checker** to ensure the tree adheres to B-Tree invariants (Key and ChildId constraints).
 
-## Default Tree
+## Installation & Build
+This is a C# project targeting **.NET 8**.
+* **IDE:** Visual Studio 2022 (or higher).
+* **Build:** 1. Clone the repository.
+  2. Open the solution file.
+  3. Run `dotnet build` or use your IDE's Build command.
 
-The default tree is Order 60, with an 80% leaf fill and an 80% internal node fill.  The nodes are deliberately underfilled for safety reasons.
+## Performance & Purpose
+The primary goal of this bulk loader is to eliminate "dead space" (unused nodes) and produce a perfectly balanced tree.
+* **Time Complexity:** $O(N)$
+* **Space Complexity:** $O(\log N)$
+  > *Note: In practice, space is effectively $O(1)$ because the tree height remains very small (e.g., 3 levels) even for large datasets with an order > 10.*
 
-## Purpose
+## Unit Testing & Sanity Checks
+The project includes a comprehensive test suite to ensure trees are well-formed and valid.
 
-The purpose of the bulk loader is to remove dead space (unused nodes) in the tree.  A balanced tree is produced.  The bulk loader is quick.  Runtime is O(N) and Space is O(Log N), where N is the number of keys.  In practice, space is a constant O(1), since the number of levels in the tree is a very small number.  Three levels are common.  There are O(Log N) levels, where N is generally 3 for order > 10 keys per node.
+### Structural Rules
+The **Node Checker** validates the following logic for every node in the tree:
 
-## Sanity Checks
+| Node Type | Rule / Constraint |
+| :--- | :--- |
+| **Leaf Node** | $0 < \text{Keys.Count} < \text{Order}$ |
+| **Leaf Node** | $\text{ChildIds.Count} == 0$ |
+| **Index Node** | $0 < \text{ChildIds.Count} \le \text{Order}$ |
+| **Index Node** | $\text{Keys.Count} = \text{ChildIds.Count} - 1$ |
 
-All nodes in the Tree are checked, including the root node.
+### Test Coverage
+* **Scale Testing:** Building trees of various sizes and degrees.
+* **Fill Factor Validation:** Verifying that the 80% default fill factor (or custom inputs) is respected.
+* **Integrity Checks:** Detecting Key and ChildId violations against basic B-Tree rules.
 
-* If leaf node, then node.Keys.Count > 0.
-* If leaf mode, then node.Keys.Count < Order.
-* If leaf node, then node.ChildIds.Count == 0.
-* If lndex node, then node.ChildsIds.Count > 0.
-* If lndex node, node.ChildIds.Count <= Order.
-
+## Default Configuration
+By default, the application uses:
+* **Order:** 60
+* **Leaf Fill:** 80%
+* **Internal Node Fill:** 80%
+* *Nodes are deliberately underfilled to allow for immediate post-load insertions without immediate splits.*
 
