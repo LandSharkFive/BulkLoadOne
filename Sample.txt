@@ -1,0 +1,21 @@
+Bulk Load Complete. Root ID: 8
+Node 8 (I): Keys [16]
+    Node 5 (I): Keys [4, 8, 12]
+        Node 1 (L): Keys [1, 2, 3]
+        Node 2 (L): Keys [5, 6, 7]
+        Node 3 (L): Keys [9, 10, 11]
+        Node 4 (L): Keys [13, 14, 15]
+    Node 7 (I): Keys [20]
+        Node 6 (L): Keys [17, 18, 19]
+--- PHYSICAL DISK DUMP ---
+Page 1: (IsLeaf: True)  Keys [1, 2, 3]  ChildIds []
+Page 2: (IsLeaf: True)  Keys [5, 6, 7]  ChildIds []
+Page 3: (IsLeaf: True)  Keys [9, 10, 11]  ChildIds []
+Page 4: (IsLeaf: True)  Keys [13, 14, 15]  ChildIds []
+Page 5: (IsLeaf: False)  Keys [4, 8, 12]  ChildIds [1, 2, 3, 4]
+Page 6: (IsLeaf: True)  Keys [17, 18, 19]  ChildIds []
+Page 7: (IsLeaf: False)  Keys [20]  ChildIds [6]
+Page 8: (IsLeaf: False)  Keys [16]  ChildIds [5, 7]
+
+16 4 8 12 1 2 3 5 6 7 9 10 11 13 14 15 20 17 18 19
+Size True
